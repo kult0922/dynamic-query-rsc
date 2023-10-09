@@ -1,10 +1,16 @@
 import { PokemonType } from "./Filter";
+import { cookies } from "next/headers";
+
 type Props = {
   pokemonType: PokemonType;
 };
 export default async function List({ pokemonType: pokemonType }: Props) {
+  const cookieStore = cookies();
+  const cookiePokemoType = cookieStore.get("pokemonType");
+  console.log("cookiePokemoType", cookiePokemoType?.value);
+
   const data = await (
-    await fetch(`https://pokeapi.co/api/v2/type/${pokemonType}`)
+    await fetch(`https://pokeapi.co/api/v2/type/${cookiePokemoType?.value}`)
   ).json();
   console.group("List.tsx");
   console.log(pokemonType);

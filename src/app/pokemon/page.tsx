@@ -13,7 +13,7 @@ export default function Page({
   return (
     <div>
       <Filter />
-      <List pokemonType={searchParams["pokemonType"] as PokemonType} />
+      <List pokemonType={"fire" as PokemonType} />
     </div>
   );
 }

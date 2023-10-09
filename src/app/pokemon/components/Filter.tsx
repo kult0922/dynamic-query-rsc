@@ -49,12 +49,11 @@ const FilterComponent: React.FC = () => {
 
   const changePokemoType = (pokemonType: PokemonType) => {
     console.log("changePokemoType", pokemonType);
-    const params = new URLSearchParams([["pokemonType", pokemonType]]);
-    router.replace(`/pokemon?${params.toString()}`);
+    document.cookie = `pokemonType=${pokemonType}`;
+    router.refresh();
     setSelectedPokemonType(pokemonType);
   };
   console.log("Filter dendrer");
-  console.log(selectedPokemonType);
 
   return (
     <div>
