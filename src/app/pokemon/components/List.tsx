@@ -1,3 +1,4 @@
+import { Slabo_13px } from "next/font/google";
 import { PokemonType } from "./Filter";
 import { cookies } from "next/headers";
 
@@ -16,16 +17,21 @@ export default async function List({ pokemonType: pokemonType }: Props) {
   console.log(pokemonType);
 
   const pokemons = data.pokemon.slice(0, 20).map((elm: any) => {
-    return { name: elm.pokemon.name, url: elm.pokemon.url };
+    const pokemonId = elm.pokemon.url.split("/").slice(-2)[0];
+    console.log("pokemonId", pokemonId);
+    return {
+      name: elm.pokemon.name,
+      imageUrl: `https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/${pokemonId}.png`,
+    };
   });
 
   return (
-    <div>
+    <div className="flex flex-wrap">
       {pokemons.map((pokemon: any) => {
         return (
-          <li className="todo-item" key={pokemon.name}>
-            <span className="todo-item__text">{pokemon.name}</span>
-          </li>
+          <div key={pokemon.name} className="border-2 rounded m-1">
+            <img src={pokemon.imageUrl} alt={pokemon.name} />
+          </div>
         );
       })}
     </div>
